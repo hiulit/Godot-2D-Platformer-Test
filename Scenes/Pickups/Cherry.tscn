@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-5.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-6.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-7.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-4.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/Cherry.gd" type="Script" id=12]
+[ext_resource path="res://Assets/SFX/Pickups/Pickup.wav" type="AudioStream" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "feedback",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 9 )
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "die"
+length = 0.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "die"
+} ]
+}
+
+[node name="Cherry" type="AnimatedSprite"]
+
+frames = SubResource( 1 )
+animation = "default"
+frame = 5
+playing = true
+script = ExtResource( 12 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -0.390388, 0.0732059 )
+scale = Vector2( 1, 0.923433 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/die = SubResource( 3 )
+blend_times = [  ]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 13 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+

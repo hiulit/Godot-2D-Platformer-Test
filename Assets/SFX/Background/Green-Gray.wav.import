@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Green-Gray.wav-0135c98a2e8280b9428df83712b5b58b.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Background/Green-Gray.wav"
+dest_files=[ "res://.import/Green-Gray.wav-0135c98a2e8280b9428df83712b5b58b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,16 @@
+[remap]
+
+importer="eska.aseprite_importer"
+type="PackedScene"
+path="res://.import/character-sprite.json-46eafcf65839fc1622cc3aef76e0b9f9.scn"
+
+[deps]
+
+source_file="res://Assets/character-sprite.json"
+dest_files=[ "res://.import/character-sprite.json-46eafcf65839fc1622cc3aef76e0b9f9.scn" ]
+
+[params]
+
+sheet_image=""
+post_script=""
+autoplay_animation=""
