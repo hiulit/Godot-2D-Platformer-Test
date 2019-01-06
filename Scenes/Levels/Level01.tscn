@@ -69,20 +69,22 @@ __meta__ = {
 
 [node name="Cherries" type="Node2D" parent="." index="3"]
 
+editor/display_folded = true
+
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 128, 320 )
-frame = 3
+frame = 6
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 160, 320 )
-frame = 3
+frame = 6
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 192, 320 )
-frame = 3
+frame = 6
 
 [node name="Character" parent="." index="4" instance=ExtResource( 6 )]
 
@@ -107,7 +109,7 @@ editor/display_folded = true
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 256, 320 )
-frame = 4
+frame = 3
 
 [node name="Rat" parent="." index="8" instance=ExtResource( 11 )]
 

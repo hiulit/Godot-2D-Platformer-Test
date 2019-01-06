@@ -30,7 +30,7 @@ WORLD_LIMIT_LEFT = 0
 
 [node name="Sprite" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 8, 16 )
+position = Vector2( 0, 16 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="RayCast2DStomp" type="RayCast2D" parent="Sprite" index="2"]
@@ -44,7 +44,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 8.5, 22.5 )
+position = Vector2( 0.5, 22.5 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -65,5 +65,10 @@ pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+
+[node name="Position2D" type="Position2D" parent="." index="4"]
+
+position = Vector2( 10, 22 )
+_sections_unfolded = [ "Transform" ]
 
 

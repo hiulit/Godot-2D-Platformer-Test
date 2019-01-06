@@ -16,18 +16,19 @@ var state
 var anim
 var new_anim
 
+const FIREBALL = preload("res://Scenes/Effects/Fireball.tscn")
+
 
 func _ready():
 	Global.Player = self
-#	change_state(IDLE)
 
 
 func _process(delta):
 	get_input()
 	
 	if new_anim != anim:
-        anim = new_anim
-        $Sprite/AnimationPlayer.play(anim)
+		anim = new_anim
+		$Sprite/AnimationPlayer.play(anim)
 
 
 func _physics_process(delta):
@@ -71,6 +72,7 @@ func get_input():
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("ui_up")
+	var shoot = Input.is_action_just_pressed("ui_select")
 	
 	if jump:
 		change_state(JUMP)
@@ -83,6 +85,8 @@ func get_input():
 			
 		motion.x = min(motion.x + ACCELERATION, MAX_SPEED)
 		$Sprite/Sprite.flip_h = false
+		if sign($Position2D.position.x) == -1:
+			$Position2D.position.x *= -1
 	
 	if left and not right:
 		if state == IDLE:
@@ -90,18 +94,26 @@ func get_input():
 			
 		motion.x = max(motion.x - ACCELERATION, -MAX_SPEED)
 		$Sprite/Sprite.flip_h = true
+		if sign($Position2D.position.x) == 1:
+			$Position2D.position.x *= -1
 		
-		if position.x <= WORLD_LIMIT_LEFT:
+		if position.x - 8 <= WORLD_LIMIT_LEFT:
 			motion.x = 0
 	
 	if not right and not left and state == RUN:
 		change_state(IDLE)
 
+	if shoot:
+		var fireball = FIREBALL.instance()
+		fireball.set_fireball_direction(sign($Position2D.position.x)) # Set fireball direction.
+		fireball.position = $Position2D.global_position
+		get_parent().add_child(fireball)
 
 func hurt():
 	motion.y = JUMP_FORCE / 2
 	motion.x = -MAX_SPEED / 2
 	$HitSound.play()
+
 
 func stomp():
 	$Sprite/RayCast2DStomp.force_raycast_update()
