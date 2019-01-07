@@ -4,15 +4,15 @@ const UP = Vector2(0, -1)
 
 export var GRAVITY = 20
 export var SPEED = 40
-export var MAX_X = 200
+#export var MAX_X = 200
 
 var motion = Vector2()
 
-var start_x
-var start_y
-var direction
-var target_hit = false
-var collision
+#var start_x
+#var start_y
+var direction = -1
+#var target_hit = false
+#var collision
 
 enum {RUN}
 var state
@@ -22,10 +22,7 @@ var new_anim
 
 func _ready():
 	add_to_group("enemy")
-	$AnimatedSprite.play("run")
-	start_x = position.x
-	start_y = position.y
-	direction = -1
+	change_state(RUN)
 
 
 func _process(delta):
@@ -35,32 +32,24 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	if position.x == start_x:
-		run()
-
-	if position.x < start_x - MAX_X or position.x > start_x:
-		change_direction()
-		run()
+	motion.y += GRAVITY
+	
+	motion.x = SPEED * direction
 
 	if direction == 1:
 		$AnimatedSprite.flip_h = true
-	elif direction == -1:
+	else:
 		$AnimatedSprite.flip_h = false
 
-	if target_hit:
-		Global.GameState.hurt()
+	motion = move_and_slide(motion, UP)
+	
+	if is_on_wall():
 		change_direction()
-		run()
-		target_hit = false
-
-	collision = move_and_collide(motion * delta)
-
-	if collision:
-		target_hit = true
 
 
-func run():
-	motion.x = SPEED * direction
+	if $RayCast2D.is_colliding() == false:
+		change_direction()
+		$RayCast2D.position.x *= -1
 
 
 func change_direction():
