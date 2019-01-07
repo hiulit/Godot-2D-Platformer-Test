@@ -10,8 +10,9 @@ var rate = 1 / fps
 var direction = 1
 
 
-#func _ready():
-#	Global.Fireball = self
+func _ready():
+	Global.Fireball = self
+	$AudioStreamPlayer.play()
 
 
 func _physics_process(delta):

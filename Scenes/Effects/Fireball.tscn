@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Effects/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Effects/fireball.png" type="Texture" id=2]
+[ext_resource path="res://Assets/SFX/Effects/Fire.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 9 )
 
-[node name="Fireball" type="Area2D" index="0"]
+[node name="Fireball" type="Area2D"]
 
 scale = Vector2( 0.5, 0.5 )
 input_pickable = true
@@ -39,6 +40,15 @@ shape = SubResource( 1 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
 
 rect = Rect2( -10, -10, 20, 20 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
 
