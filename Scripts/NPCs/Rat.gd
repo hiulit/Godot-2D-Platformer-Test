@@ -4,15 +4,11 @@ const UP = Vector2(0, -1)
 
 export var GRAVITY = 20
 export var SPEED = 40
-#export var MAX_X = 200
 
 var motion = Vector2()
 
-#var start_x
-#var start_y
 var direction = -1
-#var target_hit = false
-#var collision
+var is_dead = false
 
 enum {RUN}
 var state
@@ -32,20 +28,20 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	motion.y += GRAVITY
+	if is_dead == false:
+		motion.y += GRAVITY
+		
+		motion.x = SPEED * direction
 	
-	motion.x = SPEED * direction
-
-	if direction == 1:
-		$AnimatedSprite.flip_h = true
-	else:
-		$AnimatedSprite.flip_h = false
-
-	motion = move_and_slide(motion, UP)
+		if direction == 1:
+			$AnimatedSprite.flip_h = true
+		else:
+			$AnimatedSprite.flip_h = false
 	
+		motion = move_and_slide(motion, UP)
+		
 	if is_on_wall():
 		change_direction()
-
 
 	if $RayCast2D.is_colliding() == false:
 		change_direction()
@@ -65,8 +61,8 @@ func change_state(new_state):
 
 
 func die():
-	motion.x = 0
-	motion.y = 0
+	is_dead = true
+	motion = Vector2(0, 0)
 	$AnimatedSprite.play("die")
 
 
