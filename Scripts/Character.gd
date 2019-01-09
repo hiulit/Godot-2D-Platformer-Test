@@ -120,6 +120,27 @@ func stomp():
 	if $Sprite/RayCast2DStomp.is_colliding():
 		var collider = $Sprite/RayCast2DStomp.get_collider()
 		if collider.is_in_group("enemy"):
-			print("enemy die")
 			collider.die()
-			motion.y = JUMP_FORCE
+			motion.y = JUMP_FORCE / 2
+
+func _on_GhostTimer_timeout():
+	if state != IDLE:
+		var ghost = preload("res://Scenes/Ghost.tscn").instance()
+		
+		get_parent().add_child(ghost)
+		ghost.position = position
+		ghost.position.y += 16 # Ofsset that the Player's Sprite has
+		
+		ghost.flip_h = $Sprite/Sprite.flip_h
+		
+		var current_anim_frame = round($Sprite/AnimationPlayer.current_animation_position * 100)
+		var sprite_frame = $Sprite/Sprite.frame
+		var sprite_texture = $Sprite/Sprite.texture
+		sprite_frame = current_anim_frame
+		print(current_anim_frame)
+		print(sprite_frame)
+		
+		ghost.texture = sprite_texture
+		ghost.vframes = 1
+		ghost.hframes = 11
+		ghost.frame = sprite_frame
