@@ -4,7 +4,7 @@ const SPEED = 100
 var motion = Vector2()
 
 var timer = 0
-export var fps = 20.0 # Must be a floating point number
+var fps = 20.0 # Must be a floating point number
 var rate = 1 / fps
 
 var direction = 1
@@ -29,7 +29,7 @@ func set_fireball_direction(new_dir):
 	direction = new_dir
 
 	if new_dir == -1:
-		$Sprite.flip_v = true # flip_v because it has a 90 degrees rotation
+		$Sprite.flip_v = true # flip_v instead of flip_h because it has a 90 degrees rotation
 
 
 func play_anim():
