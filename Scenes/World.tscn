@@ -177,6 +177,7 @@ _sections_unfolded = [ "Offset" ]
 editor/display_folded = true
 position = Vector2( 64, 153 )
 _sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
+MAX_SPEED = 100
 
 [node name="Camera2D" parent="Character" index="2" instance=ExtResource( 14 )]
 

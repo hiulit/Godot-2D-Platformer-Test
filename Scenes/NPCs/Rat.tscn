@@ -45,14 +45,16 @@ _sections_unfolded = [ "Collision", "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
-GRAVITY = 20
-SPEED = 40
+speed = 40
+hp = 1
+size = Vector2( 1, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 position = Vector2( 0, 18 )
 frames = SubResource( 1 )
 animation = "run"
+frame = 2
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]

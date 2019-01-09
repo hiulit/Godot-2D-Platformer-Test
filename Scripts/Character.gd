@@ -4,7 +4,7 @@ const UP = Vector2(0, -1)
 
 export var GRAVITY = 20
 export var ACCELERATION = 40
-export var MAX_SPEED = 200
+export var MAX_SPEED = 100
 export var JUMP_FORCE = -500
 export var WORLD_LIMIT_BOTTOM = 500
 export var WORLD_LIMIT_LEFT = 0
@@ -18,6 +18,8 @@ var new_anim
 
 const FIREBALL = preload("res://Scenes/Effects/Fireball.tscn")
 
+var stomping = false
+var is_dead = false
 
 func _ready():
 	Global.Player = self
@@ -32,26 +34,34 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	motion.y += GRAVITY
+	if is_dead == false:
+		motion.y += GRAVITY
+
+		if is_on_floor():
+			if state == FALL:
+				change_state(IDLE)
 	
-	stomp()
-
-	if is_on_floor():
-		if state == FALL:
-			change_state(IDLE)
-
-		if state == IDLE:
-			motion.x = lerp(motion.x, 0, 0.3)
-	else:
-		motion.x = lerp(motion.x, 0, 0.05)
+			if state == IDLE:
+				motion.x = lerp(motion.x, 0, 0.3)
+		else:
+			motion.x = lerp(motion.x, 0, 0.05)
+			
+			if motion.y > 0:
+				change_state(FALL)
+				
+			if position.y > WORLD_LIMIT_BOTTOM:
+				Global.GameState.end_game()
+				
+		motion = move_and_slide(motion, UP)
 		
-		if motion.y > 0:
-			change_state(FALL)
+		if state == IDLE:
+			stomp()
 			
-		if position.y > WORLD_LIMIT_BOTTOM:
-			Global.GameState.end_game()
-			
-	motion = move_and_slide(motion, UP)
+		if get_slide_count() > 0:
+			for i in range(get_slide_count()):
+				if get_slide_collision(i).collider.is_in_group("enemy"):
+					if stomping == false:
+						die()
 
 
 func change_state(new_state):
@@ -116,12 +126,23 @@ func hurt():
 
 
 func stomp():
+	stomping = true
 	$Sprite/RayCast2DStomp.force_raycast_update()
 	if $Sprite/RayCast2DStomp.is_colliding():
 		var collider = $Sprite/RayCast2DStomp.get_collider()
 		if collider.is_in_group("enemy"):
 			collider.die()
 			motion.y = JUMP_FORCE / 2
+
+
+func die():
+	is_dead = true
+	motion = Vector2(0, 0)
+	$Sprite.rotation_degrees = -90
+	$Sprite.position.y += 12
+	$CollisionShape2D.disabled = true
+	$DeathTimer.start()
+
 
 func _on_GhostTimer_timeout():
 	if state != IDLE:
@@ -146,3 +167,7 @@ func _on_GhostTimer_timeout():
 			ghost.vframes = 1
 			ghost.hframes = 11
 			ghost.frame = sprite_frame
+
+
+func _on_DeathTimer_timeout():
+	get_tree().change_scene(Global.TitleScreen)

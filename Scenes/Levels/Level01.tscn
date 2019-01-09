@@ -73,17 +73,17 @@ __meta__ = {
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 128, 320 )
-frame = 2
+frame = 5
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 160, 320 )
-frame = 2
+frame = 5
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 192, 320 )
-frame = 2
+frame = 5
 
 [node name="Character" parent="." index="4" instance=ExtResource( 6 )]
 
@@ -105,19 +105,29 @@ position = Vector2( 448, 192 )
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 256, 320 )
+frame = 0
 
 [node name="Rats" type="Node2D" parent="." index="8"]
 
 [node name="Rat" parent="Rats" index="0" instance=ExtResource( 11 )]
 
-position = Vector2( 260, 350 )
+position = Vector2( 260, 340 )
+speed = 40
+hp = 2
+size = Vector2( 2, 2 )
 
 [node name="Rat2" parent="Rats" index="1" instance=ExtResource( 11 )]
 
 position = Vector2( 270, 250 )
+speed = 40
+hp = 1
+size = Vector2( 1, 1 )
 
 [node name="Rat3" parent="Rats" index="2" instance=ExtResource( 11 )]
 
 position = Vector2( 150, 200 )
+speed = 40
+hp = 1
+size = Vector2( 1, 1 )
 
 

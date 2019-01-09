@@ -24,7 +24,7 @@ __meta__ = {
 }
 GRAVITY = 20
 ACCELERATION = 40
-MAX_SPEED = 200
+MAX_SPEED = 100
 JUMP_FORCE = -500
 WORLD_LIMIT_BOTTOM = 500
 WORLD_LIMIT_LEFT = 0
@@ -36,7 +36,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="RayCast2DStomp" type="RayCast2D" parent="Sprite" index="2"]
 
-position = Vector2( 0, 16 )
+position = Vector2( 0.5, 16 )
+scale = Vector2( 3.5, 1 )
 enabled = true
 exclude_parent = true
 cast_to = Vector2( 0, 1 )
@@ -79,6 +80,15 @@ wait_time = 0.1
 one_shot = false
 autostart = true
 
+[node name="DeathTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
 [connection signal="timeout" from="GhostTimer" to="." method="_on_GhostTimer_timeout"]
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 
 
