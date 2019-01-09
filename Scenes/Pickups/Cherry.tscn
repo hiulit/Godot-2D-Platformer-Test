@@ -70,7 +70,7 @@ tracks/1/keys = {
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 2
+frame = 3
 playing = true
 script = ExtResource( 12 )
 _sections_unfolded = [ "Transform" ]
@@ -105,6 +105,7 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/die = SubResource( 3 )
 blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
 
