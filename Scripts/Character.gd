@@ -133,15 +133,16 @@ func _on_GhostTimer_timeout():
 		
 		ghost.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
 		
-		var current_anim_frame = round(round($Sprite/AnimationPlayer.current_animation_position * 100) / 10)
-		var sprite_frame = $Sprite/Sprite.frame
-		var sprite_texture = $Sprite/Sprite.texture
-		sprite_frame = current_anim_frame
-		
-#		print(current_anim_frame)
-#		print(sprite_frame)
-		
-		ghost.texture = sprite_texture
-		ghost.vframes = 1
-		ghost.hframes = 11
-		ghost.frame = sprite_frame
+		if $Sprite/AnimationPlayer.is_playing():
+			var current_anim_frame = round(round($Sprite/AnimationPlayer.current_animation_position * 100) / 10)
+			var sprite_frame = $Sprite/Sprite.frame
+			var sprite_texture = $Sprite/Sprite.texture
+			sprite_frame = current_anim_frame
+			
+	#		print(current_anim_frame)
+	#		print(sprite_frame)
+			
+			ghost.texture = sprite_texture
+			ghost.vframes = 1
+			ghost.hframes = 11
+			ghost.frame = sprite_frame
