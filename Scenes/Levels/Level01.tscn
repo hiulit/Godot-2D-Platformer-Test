@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=11]
 
-[node name="Level01" type="Node2D"]
+[node name="Level01" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 starting_lives = 3
@@ -73,17 +73,17 @@ __meta__ = {
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 128, 320 )
-frame = 2
+frame = 1
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 160, 320 )
-frame = 2
+frame = 1
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 192, 320 )
-frame = 2
+frame = 1
 
 [node name="Character" parent="." index="4" instance=ExtResource( 6 )]
 
@@ -105,6 +105,7 @@ position = Vector2( 448, 192 )
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 256, 320 )
+frame = 0
 
 [node name="Rats" type="Node2D" parent="." index="8"]
 

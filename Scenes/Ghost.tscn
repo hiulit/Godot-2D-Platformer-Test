@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scripts/Ghost.gd" type="Script" id=1]
 
-[node name="Ghost" type="Sprite" index="0"]
+[node name="Ghost" type="Sprite"]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Z Index" ]
 
 [node name="AlphaTween" type="Tween" parent="." index="0"]
 
