@@ -17,6 +17,8 @@ var seen = false
 var target_hit = false
 var collision
 
+var is_dead = false
+
 enum {FLY, ATTACK}
 var state
 var anim
@@ -38,54 +40,55 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	motion.y = 0
-
-	if position.x == start_x:
-		fly()
-
-	if position.x < start_x - MAX_X or position.x > start_x:
-		change_direction()
-		fly()
+	if is_dead == false:
+		motion.y = 0
+	
+		if position.x == start_x:
+			fly()
+	
+		if position.x < start_x - MAX_X or position.x > start_x:
+			change_direction()
+			fly()
+			
+		if attack and position.y >= Global.Player.position.y:
+			go_up = true
+	
+		if direction == 1:
+			$AnimatedSprite.flip_h = true
+		elif direction == -1:
+			$AnimatedSprite.flip_h = false
+	
+		if $AnimatedSprite/RayCast2D.is_colliding():
+			var collider = $AnimatedSprite/RayCast2D.get_collider()
+			if collider == Global.Player:
+				seen = true
+				attack = true
+			else:
+				seen = false
+				change_state(FLY)
+	
+		if seen and not target_hit:
+			change_state(ATTACK)
+			attack()
 		
-	if attack and position.y >= Global.Player.position.y:
-		go_up = true
-
-	if direction == 1:
-		$AnimatedSprite.flip_h = true
-	elif direction == -1:
-		$AnimatedSprite.flip_h = false
-
-	if $AnimatedSprite/RayCast2D.is_colliding():
-		var collider = $AnimatedSprite/RayCast2D.get_collider()
-		if collider == Global.Player:
-			seen = true
-			attack = true
-		else:
+		if attack and not target_hit and not seen:
+			change_state(FLY)
+			fallback()
+	
+		if target_hit:
+			change_state(FLY)
+			fallback()
+		
+		if go_up:
 			seen = false
 			change_state(FLY)
-
-	if seen and not target_hit:
-		change_state(ATTACK)
-		attack()
+			fallback()
 	
-	if attack and not target_hit and not seen:
-		change_state(FLY)
-		fallback()
-
-	if target_hit:
-		change_state(FLY)
-		fallback()
+		collision = move_and_collide(motion * delta)
 	
-	if go_up:
-		seen = false
-		change_state(FLY)
-		fallback()
-
-	collision = move_and_collide(motion * delta)
-
-	if collision:
-		target_hit = true
-		Global.GameState.hurt()
+		if collision:
+			target_hit = true
+			Global.GameState.hurt()
 
 
 func fly():
@@ -123,8 +126,9 @@ func change_state(new_state):
 
 
 func die():
-	motion.x = 0
-	motion.y = 0
+	is_dead = true
+	motion = Vector2(0, 0)
+	$CollisionShape2D.disabled = true
 	$AnimatedSprite.play("die")
 
 

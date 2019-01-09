@@ -63,6 +63,7 @@ func change_state(new_state):
 func die():
 	is_dead = true
 	motion = Vector2(0, 0)
+	$CollisionShape2D.disabled = true
 	$AnimatedSprite.play("die")
 
 
