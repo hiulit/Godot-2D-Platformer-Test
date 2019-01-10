@@ -75,6 +75,8 @@ func die():
 		motion = Vector2(0, 0)
 		$CollisionShape2D.disabled = true
 		$AnimatedSprite.play("die")
+		if scale > Vector2(1, 1):
+			get_parent().get_parent().get_node("ScreenShake").screen_shake(1, 10, 100)
 
 
 func _on_AnimatedSprite_animation_finished():
