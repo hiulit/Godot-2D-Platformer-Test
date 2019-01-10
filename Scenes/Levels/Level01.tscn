@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/GameState.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/ParallaxBackground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://TileSets/AutoTile.tres" type="TileSet" id=3]
-[ext_resource path="res://TileSets/BackgorundProps.tres" type="TileSet" id=4]
-[ext_resource path="res://Scenes/Pickups/Cherry.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/NPCs/Eagle.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/ScreenShake.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/ParallaxBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TileSets/AutoTile.tres" type="TileSet" id=4]
+[ext_resource path="res://TileSets/BackgorundProps.tres" type="TileSet" id=5]
+[ext_resource path="res://Scenes/Pickups/Cherry.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/NPCs/Eagle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=12]
 
 [node name="Level01" type="Node2D" index="0"]
 
@@ -18,12 +19,14 @@ script = ExtResource( 1 )
 starting_lives = 3
 points_target = 3
 
-[node name="ParallaxBackground" parent="." index="0" instance=ExtResource( 2 )]
+[node name="ScreenShake" parent="." index="0" instance=ExtResource( 2 )]
 
-[node name="Terrain" type="TileMap" parent="." index="1"]
+[node name="ParallaxBackground" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="Terrain" type="TileMap" parent="." index="2"]
 
 mode = 0
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -44,10 +47,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BackgroundProps" type="TileMap" parent="." index="2"]
+[node name="BackgroundProps" type="TileMap" parent="." index="3"]
 
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -68,66 +71,67 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Cherries" type="Node2D" parent="." index="3"]
+[node name="Cherries" type="Node2D" parent="." index="4"]
 
-[node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 5 )]
+editor/display_folded = true
+
+[node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 5
+frame = 4
 
-[node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 5 )]
+[node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 5
+frame = 4
 
-[node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 5 )]
+[node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 5
+frame = 4
 
-[node name="Character" parent="." index="4" instance=ExtResource( 6 )]
+[node name="Character" parent="." index="5" instance=ExtResource( 7 )]
 
 position = Vector2( 64, 352 )
+ACCELERATION = 50
+MAX_SPEED = 150
 
-[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 7 )]
+[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 8 )]
 
-[node name="Frog" parent="." index="5" instance=ExtResource( 8 )]
+[node name="Frog" parent="." index="6" instance=ExtResource( 9 )]
 
 position = Vector2( 480, 352 )
 jump_nth = 3
 
-[node name="Eagle" parent="." index="6" instance=ExtResource( 9 )]
+[node name="Eagle" parent="." index="7" instance=ExtResource( 10 )]
 
 position = Vector2( 448, 192 )
 
-[node name="Gems" type="Node2D" parent="." index="7"]
+[node name="Gems" type="Node2D" parent="." index="8"]
 
-[node name="Gem" parent="Gems" index="0" instance=ExtResource( 10 )]
+editor/display_folded = true
+
+[node name="Gem" parent="Gems" index="0" instance=ExtResource( 11 )]
 
 position = Vector2( 256, 320 )
-frame = 0
+frame = 4
 
-[node name="Rats" type="Node2D" parent="." index="8"]
+[node name="Rats" type="Node2D" parent="." index="9"]
 
-[node name="Rat" parent="Rats" index="0" instance=ExtResource( 11 )]
+editor/display_folded = true
+
+[node name="Rat" parent="Rats" index="0" instance=ExtResource( 12 )]
 
 position = Vector2( 260, 340 )
-speed = 40
 hp = 2
 size = Vector2( 2, 2 )
 
-[node name="Rat2" parent="Rats" index="1" instance=ExtResource( 11 )]
+[node name="Rat2" parent="Rats" index="1" instance=ExtResource( 12 )]
 
 position = Vector2( 270, 250 )
-speed = 40
-hp = 1
-size = Vector2( 1, 1 )
 
-[node name="Rat3" parent="Rats" index="2" instance=ExtResource( 11 )]
+[node name="Rat3" parent="Rats" index="2" instance=ExtResource( 12 )]
 
 position = Vector2( 150, 200 )
-speed = 40
-hp = 1
-size = Vector2( 1, 1 )
 
 
