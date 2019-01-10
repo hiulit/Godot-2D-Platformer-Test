@@ -3,7 +3,6 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 
 export var GRAVITY = 20
-export var SPEED = 40
 export var MAX_X = 200
 
 var motion = Vector2()
@@ -18,11 +17,15 @@ var target_hit = false
 var collision
 
 var is_dead = false
+var damage
 
 enum {FLY, ATTACK}
 var state
 var anim
 var new_anim
+
+export (int) var speed = 40
+export (int) var hp = 1
 
 
 func _ready():
@@ -92,7 +95,7 @@ func _physics_process(delta):
 
 
 func fly():
-	motion.x = SPEED * direction
+	motion.x = speed * direction
 
 
 func change_direction():
@@ -125,11 +128,13 @@ func change_state(new_state):
 			new_anim = "attack"
 
 
-func die():
-	is_dead = true
-	motion = Vector2(0, 0)
-	$CollisionShape2D.disabled = true
-	$AnimatedSprite.play("die")
+func die(damage):
+	hp -= damage
+	if hp <= 0:
+		is_dead = true
+		motion = Vector2(0, 0)
+		$CollisionShape2D.disabled = true
+		$AnimatedSprite.play("die")
 
 
 func _on_AnimatedSprite_animation_finished():

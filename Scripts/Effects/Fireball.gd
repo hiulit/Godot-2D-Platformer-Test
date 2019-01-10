@@ -1,6 +1,5 @@
 extends Area2D
 
-const SPEED = 100
 var motion = Vector2()
 
 var timer = 0
@@ -8,7 +7,9 @@ var fps = 20.0 # Must be a floating point number
 var rate = 1 / fps
 
 var direction = 1
+var damage = 1
 
+export var speed = 200
 
 func _ready():
 	Global.Fireball = self
@@ -16,7 +17,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	motion.x = SPEED * delta * direction
+	motion.x = speed * delta * direction
 	translate(motion)
 
 	timer += delta
@@ -46,6 +47,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Fireball_body_entered(body):
 	if body.is_in_group("enemy"):
-		body.die()
+		body.die(damage)
 
 	queue_free()

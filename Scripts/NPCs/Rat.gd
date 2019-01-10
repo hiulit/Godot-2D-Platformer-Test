@@ -68,8 +68,8 @@ func change_state(new_state):
 			new_anim = "run"
 
 
-func die():
-	hp -= 1
+func die(damage):
+	hp -= damage
 	if hp <= 0:
 		is_dead = true
 		motion = Vector2(0, 0)

@@ -9,7 +9,7 @@
 [ext_resource path="res://Assets/Sprites/Props/Gem/gem-3.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Props/Gem/gem-4.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Props/Gem/gem-5.png" type="Texture" id=9]
-[ext_resource path="res://Scripts/Cherry.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Pikcups.gd" type="Script" id=10]
 [ext_resource path="res://Assets/SFX/Pickups/Pickup.wav" type="AudioStream" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -68,7 +68,6 @@ tracks/1/keys = {
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 2
 playing = true
 script = ExtResource( 10 )
 _sections_unfolded = [ "Transform" ]

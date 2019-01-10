@@ -19,6 +19,7 @@ var anim
 var new_anim
 
 const FIREBALL = preload("res://Scenes/Effects/Fireball.tscn")
+var fireball_power = 1
 
 var stomping = false
 var is_dead = false
@@ -120,9 +121,14 @@ func get_input():
 		change_state(IDLE)
 
 	if shoot:
-		var fireball = FIREBALL.instance()
+		var fireball
+
+		if fireball_power >= 1:
+			fireball = FIREBALL.instance()
+
 		fireball.set_fireball_direction(sign($Position2D.position.x)) # Set fireball direction.
 		fireball.position = $Position2D.global_position
+		fireball.damage = fireball_power
 		get_parent().add_child(fireball)
 
 
@@ -138,8 +144,13 @@ func stomp():
 	if $Sprite/RayCast2DStomp.is_colliding():
 		var collider = $Sprite/RayCast2DStomp.get_collider()
 		if collider.is_in_group("enemy"):
-			collider.die()
+			collider.die(1)
 			motion.y = JUMP_FORCE / 2
+
+
+func power_up():
+	fireball_power = 2
+#	Global.Fireball.damage = fireball_power
 
 
 func die():
