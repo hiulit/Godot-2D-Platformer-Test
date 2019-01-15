@@ -31,7 +31,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 14, 10 )
+extents = Vector2( 16, 10 )
 _sections_unfolded = [ "Resource" ]
 
 [node name="Rat" type="KinematicBody2D"]
@@ -59,7 +59,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -3, 22 )
+position = Vector2( -1, 22 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 

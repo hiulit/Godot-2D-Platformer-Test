@@ -1,31 +1,31 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-1.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-2.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-3.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-4.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-4.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-5.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-6.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-7.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/Pikcups.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-5.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-6.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Props/Cherry/cherry-7.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Props/ItemFeedback/item-feedback-4.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/Pickups/Pikcups.gd" type="Script" id=12]
 [ext_resource path="res://Assets/SFX/Pickups/Pickup.wav" type="AudioStream" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": false,
-"name": "feedback",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 6.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "feedback",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -70,7 +70,7 @@ tracks/1/keys = {
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 1
+frame = 3
 playing = true
 script = ExtResource( 12 )
 _sections_unfolded = [ "Transform" ]

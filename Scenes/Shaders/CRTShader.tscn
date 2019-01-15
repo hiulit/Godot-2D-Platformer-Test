@@ -3,7 +3,7 @@
 [ext_resource path="res://Shaders/crt_material.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Panel.gd" type="Script" id=2]
 
-[node name="CRTShader" type="CanvasLayer"]
+[node name="CRTShader" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -26,7 +26,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Anchor", "Margin", "Material", "Rect", "Visibility" ]
+_sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }

@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Platformer Test"
-run/main_scene="res://Scenes/World.tscn"
+run/main_scene="res://Scenes/Levels/Level01.tscn"
 config/icon="res://icon.png"
 
 [autoload]
