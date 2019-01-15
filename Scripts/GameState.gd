@@ -6,7 +6,6 @@ export var points_target = 3 # How many points for an extra life.
 var lives
 var points = 0
 
-
 func _ready():
 	Global.GameState = self
 	lives = starting_lives
@@ -28,9 +27,9 @@ func hurt():
 func points_up():
 	points += 1
 	update_GUI()
-	
+
 	var multiple_of_points_target = (points % points_target) == 0
-	
+
 	if multiple_of_points_target:
 		life_up()
 

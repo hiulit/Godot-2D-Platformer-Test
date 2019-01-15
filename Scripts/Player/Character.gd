@@ -30,7 +30,7 @@ func _ready():
 
 func _process(delta):
 	get_input()
-	
+
 	if new_anim != anim:
 		anim = new_anim
 		$Sprite/AnimationPlayer.play(anim)
@@ -43,26 +43,26 @@ func _physics_process(delta):
 		if is_on_floor():
 			if state == FALL:
 				change_state(IDLE)
-	
+
 			if state == IDLE:
 				motion.x = lerp(motion.x, 0, 0.3)
 		else:
 			motion.x = lerp(motion.x, 0, 0.05)
-			
+
 			if motion.y > 0:
 				change_state(FALL)
-				
+
 			if position.y > WORLD_LIMIT_BOTTOM:
 				Global.GameState.end_game()
 
 		if position.x - 8 <= WORLD_LIMIT_LEFT and direction == -1: # Prevent Player to go beyond the limit
 			motion.x = 0
-				
+
 		motion = move_and_slide(motion, UP)
 
 		if state == IDLE:
 			stomp()
-			
+
 		if get_slide_count() > 0:
 			for i in range(get_slide_count()):
 				if get_slide_collision(i).collider.is_in_group("enemy"):
@@ -89,29 +89,29 @@ func get_input():
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("ui_up")
 	var shoot = Input.is_action_just_pressed("ui_select")
-	
+
 	if jump:
 		change_state(JUMP)
 		motion.y = JUMP_FORCE
 		$JumpSound.play()
-	
+
 	if right and not left:
 		direction = 1
-		
+
 		if state == IDLE:
 			change_state(RUN)
-			
+
 		motion.x = min(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
 		$Sprite/Sprite.flip_h = false
 		if sign($Position2D.position.x) == -1:
 			$Position2D.position.x *= -1
-	
+
 	if left and not right:
 		direction = -1
-		
+
 		if state == IDLE:
 			change_state(RUN)
-			
+
 		motion.x = max(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
 		$Sprite/Sprite.flip_h = true
 		if sign($Position2D.position.x) == 1:
@@ -165,19 +165,19 @@ func die():
 func _on_GhostTimer_timeout():
 	if state != IDLE:
 		var ghost = preload("res://Scenes/Effects/Ghost.tscn").instance()
-		
+
 		get_parent().add_child(ghost)
 		ghost.position = position
 		ghost.position.y += 16 # Ofsset that the Player's Sprite has
-		
+
 		ghost.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
-		
+
 		if $Sprite/AnimationPlayer.is_playing():
 			var current_anim_frame = round(round($Sprite/AnimationPlayer.current_animation_position * 100) / 10)
 			var sprite_frame = $Sprite/Sprite.frame
 			var sprite_texture = $Sprite/Sprite.texture
 			sprite_frame = current_anim_frame
-			
+
 			ghost.texture = sprite_texture
 			ghost.vframes = 1
 			ghost.hframes = 11

@@ -66,7 +66,7 @@ func fall(start_pos_y):
 
 func wait_jump(max_seconds, delta):
 	elapsed_seconds += delta
-	
+
 	if elapsed_seconds > max_seconds:
 		elapsed_seconds = 0
 		jump = true

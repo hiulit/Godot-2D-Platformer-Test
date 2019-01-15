@@ -31,19 +31,19 @@ func _process(delta):
 func _physics_process(delta):
 	if is_dead == false:
 		motion.y += GRAVITY
-		
+
 		motion.x = speed * direction
-	
+
 		if direction == 1:
 			$AnimatedSprite.flip_h = true
 		else:
 			$AnimatedSprite.flip_h = false
-	
+
 		motion = move_and_slide(motion, UP)
-		
+
 		if is_on_wall():
 			change_direction()
-	
+
 		if $RayCast2D.is_colliding() == false:
 			change_direction()
 #			$RayCast2D.position.x *= -1
