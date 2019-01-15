@@ -17,7 +17,7 @@
 [ext_resource path="res://Scenes/Effects/FireParticles.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=16]
 
-[node name="Level01" type="Node2D"]
+[node name="Level01" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 starting_lives = 3
@@ -86,24 +86,24 @@ editor/display_folded = true
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 128, 320 )
-frame = 1
+frame = 2
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 160, 320 )
-frame = 1
+frame = 2
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( 192, 320 )
-frame = 1
+frame = 2
 
 [node name="Gems" type="Node2D" parent="." index="6"]
 
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 8 )]
 
 position = Vector2( 70, 320 )
-frame = 4
+frame = 3
 
 [node name="Character" parent="." index="7" instance=ExtResource( 9 )]
 
