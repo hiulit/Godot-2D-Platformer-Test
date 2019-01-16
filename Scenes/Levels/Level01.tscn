@@ -5,17 +5,17 @@
 [ext_resource path="res://Scenes/ParallaxBackground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TileSets/AutoTile.tres" type="TileSet" id=4]
 [ext_resource path="res://TileSets/BackgorundProps.tres" type="TileSet" id=5]
-[ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Pickups/Cherry.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Player/Character.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/NPCs/Eagle.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Shaders/CRTShader.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Effects/FireParticles.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Pickups/Cherry.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Player/Character.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/NPCs/Eagle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Shaders/CRTShader.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Effects/FireParticles.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=16]
 
 [node name="Level01" type="Node2D" index="0"]
 
@@ -75,81 +75,80 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DayNight" parent="." index="4" instance=ExtResource( 6 )]
-
-day_duration = 0.7
-
-[node name="Cherries" type="Node2D" parent="." index="5"]
+[node name="Cherries" type="Node2D" parent="." index="4"]
 
 editor/display_folded = true
 
-[node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 7 )]
+[node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 6
+frame = 5
 
-[node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 7 )]
+[node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 6
+frame = 5
 
-[node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 7 )]
+[node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 6
+frame = 5
 
-[node name="Gems" type="Node2D" parent="." index="6"]
+[node name="Gems" type="Node2D" parent="." index="5"]
 
-[node name="Gem" parent="Gems" index="0" instance=ExtResource( 8 )]
+[node name="Gem" parent="Gems" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 70, 320 )
-frame = 0
 
-[node name="Character" parent="." index="7" instance=ExtResource( 9 )]
+[node name="Character" parent="." index="6" instance=ExtResource( 8 )]
 
 position = Vector2( 64, 352 )
 
-[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 10 )]
+[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 9 )]
 
-[node name="Frog" parent="." index="8" instance=ExtResource( 11 )]
+[node name="Frog" parent="." index="7" instance=ExtResource( 10 )]
 
 position = Vector2( 480, 352 )
 jump_nth = 3
 
-[node name="Eagle" parent="." index="9" instance=ExtResource( 12 )]
+[node name="Eagle" parent="." index="8" instance=ExtResource( 11 )]
 
 position = Vector2( 360, 320 )
 speed = 40
 hp = 1
 
-[node name="Rats" type="Node2D" parent="." index="10"]
+[node name="Rats" type="Node2D" parent="." index="9"]
 
-[node name="Rat" parent="Rats" index="0" instance=ExtResource( 13 )]
+[node name="Rat" parent="Rats" index="0" instance=ExtResource( 12 )]
 
 position = Vector2( 260, 340 )
 hp = 2
 size = Vector2( 2, 2 )
 
-[node name="Rat2" parent="Rats" index="1" instance=ExtResource( 13 )]
+[node name="Rat2" parent="Rats" index="1" instance=ExtResource( 12 )]
 
 position = Vector2( 270, 250 )
 
-[node name="Rat3" parent="Rats" index="2" instance=ExtResource( 13 )]
+[node name="Rat3" parent="Rats" index="2" instance=ExtResource( 12 )]
 
 position = Vector2( 150, 200 )
 
-[node name="CRTShader" parent="." index="11" instance=ExtResource( 14 )]
+[node name="CRTShader" parent="." index="10" instance=ExtResource( 13 )]
 
-[node name="FireParticles" type="Node2D" parent="." index="12"]
+[node name="FireParticles" type="Node2D" parent="." index="11"]
 
-[node name="FireParticles" parent="FireParticles" index="0" instance=ExtResource( 15 )]
+[node name="FireParticles" parent="FireParticles" index="0" instance=ExtResource( 14 )]
 
 position = Vector2( 436.392, 351.382 )
 
-[node name="FireParticles2" parent="FireParticles" index="1" instance=ExtResource( 15 )]
+[node name="FireParticles2" parent="FireParticles" index="1" instance=ExtResource( 14 )]
 
 position = Vector2( 531.242, 351.382 )
 
-[node name="Rain" parent="." index="13" instance=ExtResource( 16 )]
+[node name="Rain" parent="." index="12" instance=ExtResource( 15 )]
+
+visible = false
+
+[node name="DayNight" parent="." index="13" instance=ExtResource( 16 )]
 
 
