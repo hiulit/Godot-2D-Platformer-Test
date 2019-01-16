@@ -1,7 +1,24 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="CanvasModulate" type="CanvasModulate"]
+[ext_resource path="res://Scripts/Effects/DayNight.gd" type="Script" id=1]
 
-color = Color( 0.337255, 0.435294, 0.592157, 1 )
+[node name="DayNight" type="CanvasModulate" index="0"]
+
+color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+day_duration = 1
+color_dawn = Color( 0.86, 0.7, 0.7, 1 )
+color_day = Color( 1, 1, 1, 1 )
+color_dusk = Color( 0.59, 0.66, 0.78, 1 )
+color_night = Color( 0.07, 0.09, 0.38, 1 )
+
+[node name="Tween" type="Tween" parent="." index="0"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 

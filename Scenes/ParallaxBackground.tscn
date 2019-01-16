@@ -49,6 +49,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 704, 368 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="CanvasModulate" parent="." index="2" instance=ExtResource( 3 )]
+[node name="DayNight" parent="." index="2" instance=ExtResource( 3 )]
 
 
