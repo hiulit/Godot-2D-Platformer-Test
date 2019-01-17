@@ -1,7 +1,7 @@
 extends CanvasModulate
 
-var day_duration = 0.1 # In minutes
-var day_start_hour = 0 # 24 hours time (0-23)
+var day_duration = 0.5 # In minutes
+export(float) var day_start_hour = 0  # 24 hours time (0-23)
 var day_start_number = 1
 
 var color_dawn = Color(0.86, 0.70, 0.70, 1)
