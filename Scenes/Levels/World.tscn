@@ -14,11 +14,12 @@
 [ext_resource path="res://Assets/Sprites/Props/sign.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/Props/shrooms.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Player/Character.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Shaders/CRTShader.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/GUI/PauseMenu.gd" type="Script" id=18]
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=19]
+
 
 [node name="World" type="Node" index="0"]
 

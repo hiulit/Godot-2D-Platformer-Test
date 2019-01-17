@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/GameState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/ScreenShake.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://TileSets/BackgorundProps.tres" type="TileSet" id=5]
 [ext_resource path="res://Scenes/Pickups/Cherry.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Pickups/Gem.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Player/Character.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/NPCs/Frog.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/NPCs/Eagle.tscn" type="PackedScene" id=11]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Scenes/Effects/FireParticles.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=17]
+
 
 [node name="Level01" type="Node2D" index="0"]
 
@@ -82,30 +84,32 @@ editor/display_folded = true
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 1
+frame = 0
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 1
+frame = 0
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 1
+frame = 0
 
 [node name="Gems" type="Node2D" parent="." index="5"]
 
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 70, 320 )
-frame = 0
+frame = 3
 
-[node name="Character" parent="." index="6" instance=ExtResource( 8 )]
+[node name="Player" parent="." index="6" instance=ExtResource( 8 )]
 
-position = Vector2( 64, 352 )
+position = Vector2( 30, 227 )
+collision_mask = 46
+_sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
 
-[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 9 )]
+[node name="Camera2D" parent="Player" index="2" instance=ExtResource( 9 )]
 
 [node name="Frog" parent="." index="7" instance=ExtResource( 10 )]
 
@@ -114,7 +118,7 @@ jump_nth = 3
 
 [node name="Eagle" parent="." index="8" instance=ExtResource( 11 )]
 
-position = Vector2( 540, 180 )
+position = Vector2( 403, 186 )
 speed = 40
 hp = 1
 
@@ -138,6 +142,8 @@ position = Vector2( 150, 200 )
 
 [node name="FireParticles" type="Node2D" parent="." index="11"]
 
+editor/display_folded = true
+
 [node name="FireParticles" parent="FireParticles" index="0" instance=ExtResource( 14 )]
 
 position = Vector2( 436.392, 351.382 )
@@ -154,6 +160,13 @@ visible = false
 
 position = Vector2( 364, 0 )
 scale = Vector2( 12.375, 1 )
-day_start_hour = 0
+day_start_hour = 10
+
+[node name="Boxes" type="Node2D" parent="." index="14"]
+
+[node name="Box" parent="Boxes" index="0" instance=ExtResource( 17 )]
+
+position = Vector2( 33, 331 )
+_sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
 
 
