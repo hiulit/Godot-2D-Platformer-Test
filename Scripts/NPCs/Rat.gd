@@ -17,6 +17,7 @@ export (int) var hp = 1
 export (Vector2) var size = Vector2(1, 1)
 
 func _ready():
+	queue_free()
 	add_to_group("enemy")
 	change_state(RUN)
 	scale = size
