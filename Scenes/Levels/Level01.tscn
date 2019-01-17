@@ -17,7 +17,7 @@
 [ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=16]
 
-[node name="Level01" type="Node2D" index="0"]
+[node name="Level01" type="Node2D"]
 
 script = ExtResource( 1 )
 starting_lives = 3
@@ -82,23 +82,24 @@ editor/display_folded = true
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 5
+frame = 0
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 5
+frame = 0
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 5
+frame = 0
 
 [node name="Gems" type="Node2D" parent="." index="5"]
 
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 70, 320 )
+frame = 4
 
 [node name="Character" parent="." index="6" instance=ExtResource( 8 )]
 
@@ -113,7 +114,7 @@ jump_nth = 3
 
 [node name="Eagle" parent="." index="8" instance=ExtResource( 11 )]
 
-position = Vector2( 360, 320 )
+position = Vector2( 540, 180 )
 speed = 40
 hp = 1
 
@@ -150,5 +151,8 @@ position = Vector2( 531.242, 351.382 )
 visible = false
 
 [node name="DayNight" parent="." index="13" instance=ExtResource( 16 )]
+
+position = Vector2( 364, 0 )
+scale = Vector2( 12.375, 1 )
 
 

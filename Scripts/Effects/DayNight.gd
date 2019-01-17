@@ -1,66 +1,82 @@
 extends CanvasModulate
 
-var day_duration = 0.5 # In minutes
-var start_hour = 4 # 24 hours time (0-23)
+var day_duration = 0.1 # In minutes
+var day_start_hour = 0 # 24 hours time (0-23)
+var day_start_number = 1
+
 var color_dawn = Color(0.86, 0.70, 0.70, 1)
 var color_day = Color(1, 1, 1, 1)
 var color_dusk = Color(0.59, 0.66, 0.78, 1)
 var color_night = Color(0.07, 0.09, 0.38, 1)
 
-var tick = 0
-var day_length = 0
-var current_hour = 0
-var day_number = 1
-var transition_duration
+var current_time
+var current_day_hour
+var current_day_number
 
-enum { NIGHT, DAWN, DAY, DUSK }
+var transition_duration
+var transition_duration_time = 1 # In hours
+
 var cycle
+enum { NIGHT, DAWN, DAY, DUSK }
+
+var debug_mode = true
 
 func _ready():
-	day_length = 60 * 60 * day_duration # Hours in seconds
+	day_duration = 60 * 60 * day_duration # Convert 'day_duration' from minutes to seconds
 	
-	tick = (day_length / 24) * start_hour
+	current_day_number = day_start_number
+	current_time = (day_duration / 24) * day_start_hour
+	current_day_hour = current_time / (day_duration / 24)
 	
-	current_hour = tick / (day_length / 24)
+	transition_duration = (((day_duration / 24) * transition_duration_time) / 60)
 	
-	if current_hour >= 18 or current_hour <= 5:
+	if current_day_hour >= 18 or current_day_hour <= 5:
 		cycle = NIGHT
 		color = color_night
-	elif current_hour >= 5 and current_hour <= 8:
+	elif current_day_hour >= 5 and current_day_hour <= 8:
 		cycle = DAWN
 		color = color_dawn
-	elif current_hour >= 8 and current_hour <= 16:
+	elif current_day_hour >= 8 and current_day_hour <= 16:
 		cycle = DAY
 		color = color_day
-	elif current_hour >= 16 and current_hour <= 18:
+	elif current_day_hour >= 16 and current_day_hour <= 18:
 		cycle = DUSK
 		color = color_dusk
+
+	if debug_mode == false:
+		$DebugMode.queue_free()
 		
-	transition_duration = (((day_length / 24) * 1) / 60)
+	$DebugMode/CanvasLayer/ColorRect.visible = debug_mode
 
 func _physics_process(delta):
 	day_cycle()
-	tick += 1
+	current_time += 1
 
 
 func day_cycle():
-	current_hour = tick / (day_length / 24)
+	current_day_hour = current_time / (day_duration / 24)
 	
-	if tick > day_length:
-		tick = 0
-		day_number += 1
+	if current_time >= day_duration:
+		current_time = 0
+		current_day_hour = 0
+		current_day_number += 1
 		
-	if current_hour >= 19 or current_hour <= 5:
+	if current_day_hour >= 19 or current_day_hour <= 5:
 		cycle_test(NIGHT)
-	elif current_hour >= 5 and current_hour <= 8:
+	elif current_day_hour >= 5 and current_day_hour <= 8:
 		cycle_test(DAWN)
-	elif current_hour >= 8 and current_hour <= 16:
+	elif current_day_hour >= 8 and current_day_hour <= 16:
 		cycle_test(DAY)
-	elif current_hour >= 16 and current_hour <= 19:
+	elif current_day_hour >= 16 and current_day_hour <= 19:
 		cycle_test(DUSK)
 
-#	print(str(tick) + " - " + str(current_hour) + " - " + str(cycle))
-
+#	print(str(current_time) + " - " + str(int(current_day_hour)) + " - " + str(cycle) + " - " + str(current_day_number))
+	
+	if debug_mode == true:
+		$DebugMode/CanvasLayer/ColorRect/HBoxContainer/Time.text = str(current_time)
+		$DebugMode/CanvasLayer/ColorRect/HBoxContainer/Hour.text = str(int(current_day_hour))
+		$DebugMode/CanvasLayer/ColorRect/HBoxContainer/Cycle.text = str(cycle)
+		$DebugMode/CanvasLayer/ColorRect/HBoxContainer/Day.text = str(current_day_number)
 
 func cycle_test(new_cycle):
 	if cycle != new_cycle:
