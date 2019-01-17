@@ -68,6 +68,8 @@ func _physics_process(delta):
 				if get_slide_collision(i).collider.is_in_group("enemy"):
 					if stomping == false:
 						die()
+				if get_slide_collision(i).collider.is_in_group("rigid_body") and stomping == true:
+					get_slide_collision(i).collider.apply_impulse(Vector2(0, 0), Vector2(10 * direction, 0))
 
 
 func change_state(new_state):
@@ -140,12 +142,18 @@ func hurt():
 
 func stomp():
 	stomping = true
+	
 	$Sprite/RayCast2DStomp.force_raycast_update()
+	
 	if $Sprite/RayCast2DStomp.is_colliding():
 		var collider = $Sprite/RayCast2DStomp.get_collider()
+
 		if collider.is_in_group("enemy"):
 			collider.die(1)
 			motion.y = JUMP_FORCE / 2
+
+		if collider.is_in_group("rigid_body"):
+			stomping = false
 
 
 func power_up():
