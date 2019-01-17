@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Player/Character.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/SFX/Jump/jump_02.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/SFX/Hit/Hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/Player/PlayerImport.tscn" type="PackedScene" id=4]
+
 
 
 [sub_resource type="RectangleShape2D" id=1]
