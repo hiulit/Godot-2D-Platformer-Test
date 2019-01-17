@@ -21,7 +21,7 @@ func hurt():
 	Global.Player.hurt()
 	update_GUI()
 	if lives < 0:
-		end_game()
+		Global.Player.die()
 
 
 func points_up():

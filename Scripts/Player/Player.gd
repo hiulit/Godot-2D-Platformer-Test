@@ -26,6 +26,7 @@ var is_dead = false
 
 func _ready():
 	Global.Player = self
+	add_to_group("player")
 
 
 func _process(delta):
@@ -67,8 +68,9 @@ func _physics_process(delta):
 			for i in range(get_slide_count()):
 				if get_slide_collision(i).collider.is_in_group("enemy"):
 					if stomping == false:
-						die()
-				if get_slide_collision(i).collider.is_in_group("rigid_body") and stomping == true:
+						hurt()
+
+				if get_slide_collision(i).collider.is_in_group("rigid_body") and is_on_wall():
 					get_slide_collision(i).collider.apply_impulse(Vector2(0, 0), Vector2(10 * direction, 0))
 
 
@@ -172,13 +174,13 @@ func die():
 
 func _on_GhostTimer_timeout():
 	if state != IDLE:
-		var ghost = preload("res://Scenes/Effects/Ghost.tscn").instance()
+		var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn").instance()
 
-		get_parent().add_child(ghost)
-		ghost.position = position
-		ghost.position.y += 16 # Ofsset that the Player's Sprite has
+		get_parent().add_child(ghost_trail)
+		ghost_trail.position = position
+		ghost_trail.position.y += 16 # Ofsset that the Player's Sprite has
 
-		ghost.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
+		ghost_trail.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
 
 		if $Sprite/AnimationPlayer.is_playing():
 			var current_anim_frame = round(round($Sprite/AnimationPlayer.current_animation_position * 100) / 10)
@@ -186,10 +188,10 @@ func _on_GhostTimer_timeout():
 			var sprite_texture = $Sprite/Sprite.texture
 			sprite_frame = current_anim_frame
 
-			ghost.texture = sprite_texture
-			ghost.vframes = 1
-			ghost.hframes = 11
-			ghost.frame = sprite_frame
+			ghost_trail.texture = sprite_texture
+			ghost_trail.vframes = 1
+			ghost_trail.hframes = 11
+			ghost_trail.frame = sprite_frame
 
 
 func _on_DeathTimer_timeout():

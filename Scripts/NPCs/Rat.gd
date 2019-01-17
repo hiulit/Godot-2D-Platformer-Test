@@ -17,7 +17,6 @@ export (int) var hp = 1
 export (Vector2) var size = Vector2(1, 1)
 
 func _ready():
-	queue_free()
 	add_to_group("enemy")
 	change_state(RUN)
 	scale = size
@@ -51,10 +50,10 @@ func _physics_process(delta):
 
 		if get_slide_count() > 0:
 			for i in range(get_slide_count()):
-				if "Character" in get_slide_collision(i).collider.name:
+				if get_slide_collision(i).collider.is_in_group("player"):
+					print("rat must hurt player")
 #					get_slide_collision(i).collider.die()
-					get_slide_collision(i).collider.hurt()
-
+					Global.GameState.hurt()
 
 func change_direction():
 	direction = direction * -1

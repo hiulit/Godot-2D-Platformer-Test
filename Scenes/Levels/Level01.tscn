@@ -83,17 +83,17 @@ editor/display_folded = true
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 1
+frame = 0
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 1
+frame = 0
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 1
+frame = 0
 
 [node name="Gems" type="Node2D" parent="." index="5"]
 
@@ -159,13 +159,17 @@ visible = false
 
 position = Vector2( 364, 0 )
 scale = Vector2( 12.375, 1 )
-day_start_hour = 10
 
 [node name="Boxes" type="Node2D" parent="." index="14"]
 
 [node name="Box" parent="Boxes" index="0" instance=ExtResource( 17 )]
 
 position = Vector2( 33, 331 )
+_sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
+
+[node name="Box2" parent="Boxes" index="1" instance=ExtResource( 17 )]
+
+position = Vector2( 132, 368 )
 _sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
 
 
