@@ -22,6 +22,7 @@ enum { NIGHT, DAWN, DAY, DUSK }
 var debug_mode = false
 
 func _ready():
+	queue_free()
 	day_duration = 60 * 60 * day_duration # Convert 'day_duration' from minutes to seconds
 	
 	current_day_number = day_start_number

@@ -1,7 +1,7 @@
 extends Sprite
 
 func _ready():
-	$Tween.interpolate_property(self, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 1, Tween.TRANS_SINE, Tween.EASE_OUT)
+	$Tween.interpolate_property(self, "modulate", Color(1, 1, 1, 0.5), Color(1, 1, 1, 0), Global.Player.dash_timer_wait_time, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$Tween.start()
 
 

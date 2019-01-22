@@ -13,16 +13,24 @@ var motion = Vector2()
 
 var direction = 1
 
-enum {IDLE, RUN, JUMP, FALL}
+enum {IDLE, RUN, JUMP, FALL, DASH}
 var state
 var anim
 var new_anim
 
-const FIREBALL = preload("res://Scenes/Effects/Fireball.tscn")
+var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn")
+
+var fireball = preload("res://Scenes/Effects/Fireball.tscn")
 var fireball_power = 1
+
+var dash_timer_wait_time = 5
+var dash_force = 5.0
+var dashing = false
 
 var stomping = false
 var is_dead = false
+
+var ghost_timer_wait_time = dash_timer_wait_time / dash_force / 10
 
 func _ready():
 	Global.Player = self
@@ -42,11 +50,16 @@ func _physics_process(delta):
 		motion.y += GRAVITY
 
 		if is_on_floor():
-			if state == FALL:
-				change_state(IDLE)
+			dashing = false
 
 			if state == IDLE:
 				motion.x = lerp(motion.x, 0, 0.3)
+
+			if state == JUMP:
+				jump()
+
+			if state == FALL:
+				change_state(IDLE)
 		else:
 			motion.x = lerp(motion.x, 0, 0.05)
 
@@ -72,6 +85,9 @@ func _physics_process(delta):
 
 				if get_slide_collision(i).collider.is_in_group("rigid_body") and is_on_wall():
 					get_slide_collision(i).collider.apply_impulse(Vector2(0, 0), Vector2(10 * direction, 0))
+				
+#				if get_slide_collision(i).collider.is_in_group("moving_platform"):
+#					print("moving platform")
 
 
 func change_state(new_state):
@@ -85,55 +101,70 @@ func change_state(new_state):
 		JUMP:
 			new_anim = "Jump"
 		FALL:
-			new_anim = "Fall"
+			new_anim = "Jump"
+		DASH:
+			new_anim = "Jump"
 
 
 func get_input():
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
-	var jump = Input.is_action_just_pressed("ui_up")
-	var shoot = Input.is_action_just_pressed("ui_select")
+	var jump = Input.is_action_just_pressed("ui_select")
+	var shoot = Input.is_action_just_pressed("shoot")
 
 	if jump:
 		change_state(JUMP)
-		motion.y = JUMP_FORCE
-		$JumpSound.play()
+		
+	if jump and not is_on_floor() and not dashing:
+		change_state(DASH)
+		dash()
 
 	if right and not left:
 		direction = 1
+		$Sprite/Sprite.flip_h = false
 
 		if state == IDLE:
 			change_state(RUN)
 
-		motion.x = min(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
-		$Sprite/Sprite.flip_h = false
 		if sign($Position2D.position.x) == -1:
 			$Position2D.position.x *= -1
 
+		if not dashing:
+			motion.x = min(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
+
 	if left and not right:
 		direction = -1
+		$Sprite/Sprite.flip_h = true
 
 		if state == IDLE:
 			change_state(RUN)
 
-		motion.x = max(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
-		$Sprite/Sprite.flip_h = true
 		if sign($Position2D.position.x) == 1:
 			$Position2D.position.x *= -1
+
+		if not dashing:
+			motion.x = max(motion.x + ACCELERATION * direction, MAX_SPEED * direction)
 
 	if not right and not left and state == RUN:
 		change_state(IDLE)
 
 	if shoot:
-		var fireball
+		shoot()
 
-		if fireball_power >= 1:
-			fireball = FIREBALL.instance()
 
-		fireball.set_fireball_direction(sign($Position2D.position.x)) # Set fireball direction.
-		fireball.position = $Position2D.global_position
-		fireball.damage = fireball_power
-		get_parent().add_child(fireball)
+func jump():
+	motion.y = JUMP_FORCE
+	$JumpSound.play()
+
+
+func dash():
+	dashing = true
+	$GhostTimer.wait_time = ghost_timer_wait_time
+	$GhostTimer.start()
+	$DashTimer.wait_time = dash_timer_wait_time
+	$DashTimer.start()
+#	motion.y = 0
+	motion.x += MAX_SPEED * dash_force * direction
 
 
 func hurt():
@@ -149,7 +180,7 @@ func stomp():
 	
 	if $Sprite/RayCast2DStomp.is_colliding():
 		var collider = $Sprite/RayCast2DStomp.get_collider()
-
+		
 		if collider.is_in_group("enemy"):
 			collider.die(1)
 			motion.y = JUMP_FORCE / 2
@@ -157,6 +188,15 @@ func stomp():
 		if collider.is_in_group("rigid_body"):
 			stomping = false
 
+
+func shoot():
+	if fireball_power >= 1:
+		var fireball_instance
+		fireball_instance = fireball.instance()
+		get_parent().add_child(fireball_instance)
+		fireball_instance.set_fireball_direction(sign($Position2D.position.x)) # Set fireball direction.
+		fireball_instance.position = $Position2D.global_position
+		fireball_instance.damage = fireball_power
 
 func power_up():
 	fireball_power = 2
@@ -173,14 +213,14 @@ func die():
 
 
 func _on_GhostTimer_timeout():
-	if state != IDLE:
-		var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn").instance()
+	if dashing:
+		var ghost_trail_instance
+		ghost_trail_instance = ghost_trail.instance()
+		get_parent().add_child(ghost_trail_instance)
+		ghost_trail_instance.position = position
+		ghost_trail_instance.position.y += 16 # Ofsset that the Player's Sprite has
 
-		get_parent().add_child(ghost_trail)
-		ghost_trail.position = position
-		ghost_trail.position.y += 16 # Ofsset that the Player's Sprite has
-
-		ghost_trail.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
+		ghost_trail_instance.flip_h = $Sprite/Sprite.flip_h # Control Sprite's direction
 
 		if $Sprite/AnimationPlayer.is_playing():
 			var current_anim_frame = round(round($Sprite/AnimationPlayer.current_animation_position * 100) / 10)
@@ -188,11 +228,16 @@ func _on_GhostTimer_timeout():
 			var sprite_texture = $Sprite/Sprite.texture
 			sprite_frame = current_anim_frame
 
-			ghost_trail.texture = sprite_texture
-			ghost_trail.vframes = 1
-			ghost_trail.hframes = 11
-			ghost_trail.frame = sprite_frame
+			ghost_trail_instance.texture = sprite_texture
+			ghost_trail_instance.vframes = 1
+			ghost_trail_instance.hframes = 11
+			ghost_trail_instance.frame = sprite_frame
 
 
 func _on_DeathTimer_timeout():
 	get_tree().change_scene(Global.TitleScreen)
+
+
+func _on_DashTimer_timeout():
+#	dashing = false
+	pass

@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/SFX/Jump/jump_02.wav" type="AudioStream" id=2]
-[ext_resource path="res://Assets/SFX/Hit/Hit.wav" type="AudioStream" id=3]
-[ext_resource path="res://Scenes/Player/PlayerImport.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/PlayerImport.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/SFX/Jump/jump_02.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/SFX/Hit/Hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 5.5, 9.5 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 z_index = 1
 input_pickable = false
@@ -29,51 +29,9 @@ JUMP_FORCE = -500
 WORLD_LIMIT_BOTTOM = 500
 WORLD_LIMIT_LEFT = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="Sprite" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 0.5, 22.5 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="JumpSound" type="AudioStreamPlayer" parent="." index="1"]
-
-stream = ExtResource( 2 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-[node name="HitSound" type="AudioStreamPlayer" parent="." index="2"]
-
-stream = ExtResource( 3 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-[node name="Position2D" type="Position2D" parent="." index="3"]
-
-position = Vector2( 10, 22 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="GhostTimer" type="Timer" parent="." index="4"]
-
-process_mode = 1
-wait_time = 0.1
-one_shot = false
-autostart = true
-
-[node name="DeathTimer" type="Timer" parent="." index="5"]
-
-process_mode = 1
-wait_time = 2.0
-one_shot = true
-autostart = false
-
-[node name="Sprite" parent="." index="6" instance=ExtResource( 4 )]
-
+editor/display_folded = true
 position = Vector2( 0, 16 )
 _sections_unfolded = [ "Transform" ]
 
@@ -86,8 +44,60 @@ cast_to = Vector2( 0, 1 )
 collision_mask = 36
 _sections_unfolded = [ "Transform" ]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0.5, 22.5 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Position2D" type="Position2D" parent="." index="4"]
+
+position = Vector2( 10, 22 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="GhostTimer" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="DeathTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="DashTimer" type="Timer" parent="." index="7"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="timeout" from="GhostTimer" to="." method="_on_GhostTimer_timeout"]
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 
 

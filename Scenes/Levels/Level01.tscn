@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/GameState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/ScreenShake.tscn" type="PackedScene" id=2]
@@ -14,9 +14,10 @@
 [ext_resource path="res://Scenes/NPCs/Rat.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Shaders/CRTShader.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Effects/FireParticles.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/MovingPlatform.tscn" type="PackedScene" id=18]
 
 [node name="Level01" type="Node2D" index="0"]
 
@@ -83,19 +84,21 @@ editor/display_folded = true
 [node name="Cherry" parent="Cherries" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 128, 320 )
-frame = 0
+frame = 2
 
 [node name="Cherry2" parent="Cherries" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 160, 320 )
-frame = 0
+frame = 2
 
 [node name="Cherry3" parent="Cherries" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 320 )
-frame = 0
+frame = 2
 
 [node name="Gems" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
 
 [node name="Gem" parent="Gems" index="0" instance=ExtResource( 7 )]
 
@@ -104,8 +107,9 @@ frame = 4
 
 [node name="Player" parent="." index="6" instance=ExtResource( 8 )]
 
+editor/display_folded = true
 position = Vector2( 71, 329 )
-collision_mask = 46
+collision_mask = 110
 _sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
 
 [node name="Camera2D" parent="Player" index="2" instance=ExtResource( 9 )]
@@ -118,10 +122,10 @@ jump_nth = 3
 [node name="Eagle" parent="." index="8" instance=ExtResource( 11 )]
 
 position = Vector2( 403, 186 )
-speed = 40
-hp = 1
 
 [node name="Rats" type="Node2D" parent="." index="9"]
+
+editor/display_folded = true
 
 [node name="Rat" parent="Rats" index="0" instance=ExtResource( 12 )]
 
@@ -151,25 +155,35 @@ position = Vector2( 436.392, 351.382 )
 
 position = Vector2( 531.242, 351.382 )
 
-[node name="Rain" parent="." index="12" instance=ExtResource( 15 )]
-
-visible = false
-
-[node name="DayNight" parent="." index="13" instance=ExtResource( 16 )]
+[node name="DayNight" parent="." index="12" instance=ExtResource( 15 )]
 
 position = Vector2( 364, 0 )
 scale = Vector2( 12.375, 1 )
 
-[node name="Boxes" type="Node2D" parent="." index="14"]
+[node name="Boxes" type="Node2D" parent="." index="13"]
 
-[node name="Box" parent="Boxes" index="0" instance=ExtResource( 17 )]
+editor/display_folded = true
+
+[node name="Box" parent="Boxes" index="0" instance=ExtResource( 16 )]
 
 position = Vector2( 33, 331 )
 _sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
 
-[node name="Box2" parent="Boxes" index="1" instance=ExtResource( 17 )]
+[node name="Box2" parent="Boxes" index="1" instance=ExtResource( 16 )]
 
 position = Vector2( 132, 368 )
 _sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
+
+[node name="Rain" parent="." index="14" instance=ExtResource( 17 )]
+
+visible = false
+ndrops = 1000
+Extent = Vector2( 500, 500 )
+
+[node name="MovingPlatforms" type="Node2D" parent="." index="15"]
+
+[node name="MovingPlatform" parent="MovingPlatforms" index="0" instance=ExtResource( 18 )]
+
+position = Vector2( 711, 361 )
 
 
