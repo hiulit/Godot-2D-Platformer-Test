@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/MovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Props/props.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 8 )
+
+[node name="MovingPlatform" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform" ]
+motion = Vector2( 0, 0 )
+cycle = 1.0
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D" index="0"]
+
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 256, 192, 32, 16 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" index="1"]
+
+shape = SubResource( 1 )
+
+
