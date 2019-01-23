@@ -2,12 +2,12 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 
-export var GRAVITY = 20
-export var ACCELERATION = 50
-export var MAX_SPEED = 150
-export var JUMP_FORCE = -500
-export var WORLD_LIMIT_BOTTOM = 500
-export var WORLD_LIMIT_LEFT = 0
+var GRAVITY = 20
+var ACCELERATION = 50
+var MAX_SPEED = 150
+var JUMP_FORCE = -500
+var WORLD_LIMIT_BOTTOM = 500
+var WORLD_LIMIT_LEFT = 0
 
 var motion = Vector2()
 
@@ -23,7 +23,7 @@ var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn")
 var fireball = preload("res://Scenes/Effects/Fireball.tscn")
 var fireball_power = 1
 
-var dash_timer_wait_time = 5
+var dash_timer_wait_time = 0.5
 var dash_force = 5.0
 var dashing = false
 
@@ -85,9 +85,6 @@ func _physics_process(delta):
 
 				if get_slide_collision(i).collider.is_in_group("rigid_body") and is_on_wall():
 					get_slide_collision(i).collider.apply_impulse(Vector2(0, 0), Vector2(10 * direction, 0))
-				
-#				if get_slide_collision(i).collider.is_in_group("moving_platform"):
-#					print("moving platform")
 
 
 func change_state(new_state):

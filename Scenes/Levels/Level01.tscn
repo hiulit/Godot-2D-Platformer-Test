@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/GameState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Effects/ScreenShake.tscn" type="PackedScene" id=2]
@@ -17,9 +17,8 @@
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Effects/Rain.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/MovingPlatform.tscn" type="PackedScene" id=18]
 
-[node name="Level01" type="Node2D" index="0"]
+[node name="Level01" type="Node2D"]
 
 script = ExtResource( 1 )
 starting_lives = 3
@@ -109,8 +108,13 @@ frame = 4
 
 editor/display_folded = true
 position = Vector2( 71, 329 )
-collision_mask = 110
-_sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
+GRAVITY = 20
+ACCELERATION = 50
+MAX_SPEED = 150
+JUMP_FORCE = -500
+WORLD_LIMIT_BOTTOM = 500
+WORLD_LIMIT_LEFT = 0
 
 [node name="Camera2D" parent="Player" index="2" instance=ExtResource( 9 )]
 
@@ -179,11 +183,5 @@ _sections_unfolded = [ "Applied Forces", "Collision", "Transform" ]
 visible = false
 ndrops = 1000
 Extent = Vector2( 500, 500 )
-
-[node name="MovingPlatforms" type="Node2D" parent="." index="15"]
-
-[node name="MovingPlatform" parent="MovingPlatforms" index="0" instance=ExtResource( 18 )]
-
-position = Vector2( 711, 361 )
 
 

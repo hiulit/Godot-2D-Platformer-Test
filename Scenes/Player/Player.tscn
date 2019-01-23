@@ -10,24 +10,18 @@
 custom_solver_bias = 0.0
 extents = Vector2( 5.5, 9.5 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 z_index = 1
 input_pickable = false
 collision_layer = 1
-collision_mask = 14
+collision_mask = 110
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
-GRAVITY = 20
-ACCELERATION = 50
-MAX_SPEED = 150
-JUMP_FORCE = -500
-WORLD_LIMIT_BOTTOM = 500
-WORLD_LIMIT_LEFT = 0
 
 [node name="Sprite" parent="." index="0" instance=ExtResource( 2 )]
 

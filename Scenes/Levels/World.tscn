@@ -20,8 +20,7 @@
 [ext_resource path="res://Scripts/GUI/PauseMenu.gd" type="Script" id=18]
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=19]
 
-
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -57,13 +56,13 @@ cell_clip_uv = false
 collision_use_kinematic = false
 collision_friction = 1.0
 collision_bounce = 0.0
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( -131028, 1, 0, -131027, 1, 0, -131026, 1, 0, -131025, 1, 0, -131024, 1, 0, -131023, 1, 0, -131022, 1, 0, 37, 1, 0, 38, 1, 0, 39, 1, 0, 40, 1, 0, 41, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196649, 1, 0, 196650, 1, 0, 196651, 1, 0, 196652, 1, 0, 196653, 1, 0, 196654, 1, 0, 196655, 1, 0, 327685, 6, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327698, 1, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327702, 1, 0, 327703, 1, 0, 327704, 1, 0, 327705, 1, 0, 327706, 1, 0, 327707, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 7, 0, 393249, 1, 0, 393250, 1, 0, 393251, 1, 0, 393252, 1, 0, 393253, 1, 0, 393254, 1, 0, 393255, 1, 0, 393256, 1, 0, 393257, 1, 0, 393258, 1, 0, 458757, 8, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 524293, 9, 0, 524310, 1, 0, 524311, 1, 0, 524312, 1, 0, 524313, 1, 0, 524314, 1, 0, 524317, 1, 0, 524318, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 720915, 1, 0, 720916, 1, 0, 720917, 1, 0, 720918, 1, 0, 720919, 1, 0, 720920, 1, 0, 720921, 1, 0, 720922, 1, 0, 720923, 1, 0 )
 script = ExtResource( 6 )
-_sections_unfolded = [ "Z Index" ]
+_sections_unfolded = [ "Collision", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -82,7 +81,7 @@ cell_clip_uv = false
 collision_use_kinematic = false
 collision_friction = 1.0
 collision_bounce = 0.0
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
@@ -107,12 +106,12 @@ cell_clip_uv = false
 collision_use_kinematic = false
 collision_friction = 1.0
 collision_bounce = 0.0
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 262170, 2, 0, 524325, 4, 0, 589869, 5, 0, 720907, 18, 0, 786439, 3, 0, 983085, 3, 0, 1048587, 0, 0, 1048596, 0, 0, 1114128, 1, 0, 1114130, 1, 0, 1245214, 5, 0, 1376300, 9, 0 )
-_sections_unfolded = [ "Cell" ]
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -131,11 +130,12 @@ cell_clip_uv = false
 collision_use_kinematic = false
 collision_friction = 1.0
 collision_bounce = 0.0
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -189,12 +189,18 @@ _sections_unfolded = [ "Offset" ]
 
 position = Vector2( 352, 256 )
 
-[node name="Character" parent="." index="11" instance=ExtResource( 15 )]
+[node name="Player" parent="." index="11" instance=ExtResource( 15 )]
 
-position = Vector2( 64, 153 )
+position = Vector2( 80, 150 )
 _sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
+GRAVITY = 20
+ACCELERATION = 50
+MAX_SPEED = 150
+JUMP_FORCE = -500
+WORLD_LIMIT_BOTTOM = 500
+WORLD_LIMIT_LEFT = 0
 
-[node name="Camera2D" parent="Character" index="2" instance=ExtResource( 16 )]
+[node name="Camera2D" parent="Player" index="2" instance=ExtResource( 16 )]
 
 [node name="CRTShader" parent="." index="12" instance=ExtResource( 17 )]
 
