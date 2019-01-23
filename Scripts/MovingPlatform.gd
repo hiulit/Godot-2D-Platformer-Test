@@ -2,12 +2,11 @@ extends Node2D
 
 export var motion = Vector2()
 export var cycle = 1.0
+export var direction = 1
 var accum = 0.0
-var direction = 1
 
 func _ready():
-#	queue_free()
-	$Area2D.add_to_group("moving_platform")
+	$Platform.add_to_group("moving_platform")
 
 
 func _physics_process(delta):
@@ -16,7 +15,14 @@ func _physics_process(delta):
 	var d = sin(accum)
 	var xf = Transform2D()
 	xf[2]= motion * d
-	$Area2D.transform = xf
+	$Platform.transform = xf
 
+#
 func _on_Area2D_area_entered(area):
-	direction *= -1
+#	direction *= -1
+	pass
+
+
+func _on_Area2D_body_entered(body):
+	if not body.is_in_group("player"):
+		direction *= -1

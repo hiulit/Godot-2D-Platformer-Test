@@ -11,11 +11,30 @@ extents = Vector2( 16, 8 )
 [node name="MovingPlatform" type="Node2D"]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Transform" ]
+_sections_unfolded = [ "Collision" ]
 motion = Vector2( 0, 0 )
 cycle = 1.0
+direction = 1
 
-[node name="Area2D" type="Area2D" parent="." index="0"]
+[node name="Platform" type="KinematicBody2D" parent="." index="0"]
+
+input_pickable = false
+collision_layer = 64
+collision_mask = 67
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="Platform" index="0"]
+
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 256, 192, 32, 16 )
+
+[node name="PlatformCollision" type="CollisionShape2D" parent="Platform" index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Platform" index="2"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -23,22 +42,17 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 collision_layer = 64
-collision_mask = 65
+collision_mask = 67
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+_sections_unfolded = [ "Collision" ]
 
-[node name="Sprite" type="Sprite" parent="Area2D" index="0"]
-
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 256, 192, 32, 16 )
-_sections_unfolded = [ "Region", "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
+[node name="Area2DCollision" type="CollisionShape2D" parent="Platform/Area2D" index="0"]
 
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Platform/Area2D" to="." method="_on_Area2D_area_entered"]
+
+[connection signal="body_entered" from="Platform/Area2D" to="." method="_on_Area2D_body_entered"]
 
 
