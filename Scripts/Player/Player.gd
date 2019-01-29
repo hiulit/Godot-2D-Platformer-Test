@@ -29,6 +29,10 @@ var dashing = false
 
 var stomping = false
 var is_dead = false
+var in_ladder = false
+var on_ladder = false
+
+var collider
 
 var ghost_timer_wait_time = dash_timer_wait_time / dash_force / 10
 
@@ -85,6 +89,14 @@ func _physics_process(delta):
 
 				if get_slide_collision(i).collider.is_in_group("rigid_body") and is_on_wall():
 					get_slide_collision(i).collider.apply_impulse(Vector2(0, 0), Vector2(10 * direction, 0))
+				
+				if get_slide_collision(i).collider.is_in_group("moving_platform") and is_on_floor():
+					print("on moving platform")
+				
+				if get_slide_collision(i).collider.is_in_group("ladder"):
+					collider = get_slide_collision(i).collider
+					print("on ladder")
+					on_ladder = true
 
 
 func change_state(new_state):
@@ -104,10 +116,39 @@ func change_state(new_state):
 
 
 func get_input():
+	var up = Input.is_action_pressed("ui_up")
+	var up_released = Input.is_action_just_released("ui_up")
+	var down = Input.is_action_pressed("ui_down")
+	var down_released = Input.is_action_just_released("ui_down")
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("ui_select")
 	var shoot = Input.is_action_just_pressed("shoot")
+	
+	if in_ladder:
+		if not is_on_floor():
+			motion.x = 0
+		
+		if up:
+			GRAVITY = 0
+#			motion.x += 10
+			motion.y -= 2
+		
+		if down:
+			GRAVITY = 0
+#			motion.x += 10
+			motion.y += 2
+
+		if up_released or down_released:
+			motion.y = 0
+	
+	if on_ladder:
+		if down:
+			collider.get_node("LadderCollision").disabled = true
+#			on_ladder = false
+		else:
+			collider.get_node("LadderCollision").disabled = false
+#		GRAVITY =  0
 
 	if jump:
 		change_state(JUMP)

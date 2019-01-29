@@ -16,8 +16,10 @@ func _physics_process(delta):
 	var xf = Transform2D()
 	xf[2]= motion * d
 	$Platform.transform = xf
+	
+#	print($Platform.transform[2])
 
-#
+
 func _on_Area2D_area_entered(area):
 #	direction *= -1
 	pass

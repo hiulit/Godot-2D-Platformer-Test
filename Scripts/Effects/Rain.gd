@@ -24,6 +24,7 @@ var frame_size = Vector2()
 var frame_offset = Vector2( 3, 7 )
 
 func _ready():
+	queue_free()
 #	$AudioStreamPlayer.play()
 	extents = Rect2( global_position, Extent )
 

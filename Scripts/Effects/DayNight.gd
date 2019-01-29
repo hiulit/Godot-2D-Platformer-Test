@@ -4,10 +4,10 @@ var day_duration = 0.5 # In minutes
 export(float) var day_start_hour = 10  # 24 hours time (0-23)
 var day_start_number = 1
 
-var color_dawn = Color(0.86, 0.70, 0.70, 1)
-var color_day = Color(1, 1, 1, 1)
-var color_dusk = Color(0.59, 0.66, 0.78, 1)
-var color_night = Color(0.07, 0.09, 0.38, 1)
+var color_dawn = Color(0.86, 0.70, 0.70, 1.0)
+var color_day = Color(1.0, 1.0, 1.0, 1.0)
+var color_dusk = Color(0.59, 0.66, 0.78, 1.0)
+var color_night = Color(0.07, 0.09, 0.38, 1.0)
 
 var current_time
 var current_day_hour
@@ -22,7 +22,7 @@ enum { NIGHT, DAWN, DAY, DUSK }
 var debug_mode = false
 
 func _ready():
-	queue_free()
+#	queue_free()
 	day_duration = 60 * 60 * day_duration # Convert 'day_duration' from minutes to seconds
 	
 	current_day_number = day_start_number

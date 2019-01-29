@@ -20,7 +20,7 @@
 [ext_resource path="res://Scripts/GUI/PauseMenu.gd" type="Script" id=18]
 [ext_resource path="res://Scenes/Effects/DayNight.tscn" type="PackedScene" id=19]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -192,13 +192,7 @@ position = Vector2( 352, 256 )
 [node name="Player" parent="." index="11" instance=ExtResource( 15 )]
 
 position = Vector2( 80, 150 )
-_sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
-GRAVITY = 20
-ACCELERATION = 50
-MAX_SPEED = 150
-JUMP_FORCE = -500
-WORLD_LIMIT_BOTTOM = 500
-WORLD_LIMIT_LEFT = 0
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
 
 [node name="Camera2D" parent="Player" index="2" instance=ExtResource( 16 )]
 
@@ -245,6 +239,6 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 0.71502 )
 
-[node name="CanvasModulate" parent="." index="14" instance=ExtResource( 19 )]
+[node name="DayNight" parent="." index="14" instance=ExtResource( 19 )]
 
 

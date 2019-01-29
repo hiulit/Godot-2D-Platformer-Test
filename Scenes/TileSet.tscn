@@ -12,7 +12,7 @@ extents = Vector2( 16, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -102,40 +102,49 @@ region_enabled = true
 region_rect = Rect2( 128, 160, 32, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Sprite7" type="Sprite" parent="." index="6"]
+[node name="LadelRop" type="Sprite" parent="." index="6"]
 
-position = Vector2( 0, 128 )
+position = Vector2( 0, 130 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Sprite8" type="Sprite" parent="." index="7"]
+[node name="LadderMiddleTop" type="Sprite" parent="." index="7"]
 
-position = Vector2( 64, 128 )
+position = Vector2( 30, 130 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 32, 32, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Sprite9" type="Sprite" parent="." index="8"]
+[node name="LadderMiddleBottom" type="Sprite" parent="." index="8"]
 
-position = Vector2( 128, 128 )
+position = Vector2( 60, 130 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 64, 32, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Sprite10" type="Sprite" parent="." index="9"]
+[node name="LadderBottom" type="Sprite" parent="." index="9"]
 
-position = Vector2( 0, 192 )
+position = Vector2( 90, 130 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 
 
