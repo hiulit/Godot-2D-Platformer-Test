@@ -8,10 +8,10 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 5.35633
-height = 9.65441
+radius = 5.0
+height = 10.0
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 z_index = 1
 input_pickable = false
@@ -41,7 +41,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0, 22.5 )
+position = Vector2( 0, 22 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 

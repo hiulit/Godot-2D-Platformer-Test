@@ -2,6 +2,7 @@ extends CanvasLayer
 
 func _ready():
 	Global.GUI = self
+	queue_free()
 
 
 func update_GUI(lives, points):

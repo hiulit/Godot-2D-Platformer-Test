@@ -241,4 +241,6 @@ color = Color( 0, 0, 0, 0.71502 )
 
 [node name="DayNight" parent="." index="14" instance=ExtResource( 19 )]
 
+_sections_unfolded = [ "Material", "Visibility" ]
+
 

@@ -15,4 +15,4 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("player"):
 		body.in_ladder = false
-		body.GRAVITY = 20
+#		body.GRAVITY = 20

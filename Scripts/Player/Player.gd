@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
+var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn")
+var fireball = preload("res://Scenes/Effects/Fireball.tscn")
+
 const UP = Vector2(0, -1)
 
 var GRAVITY = 20
-var ACCELERATION = 50
+var ACCELERATION = 10
 var MAX_SPEED = 150
 var JUMP_FORCE = -500
 var WORLD_LIMIT_BOTTOM = 500
@@ -18,9 +21,6 @@ var state
 var anim
 var new_anim
 
-var ghost_trail = preload("res://Scenes/Effects/GhostTrail.tscn")
-
-var fireball = preload("res://Scenes/Effects/Fireball.tscn")
 var fireball_power = 1
 
 var dash_timer_wait_time = 0.5
@@ -126,29 +126,34 @@ func get_input():
 	var shoot = Input.is_action_just_pressed("shoot")
 	
 	if in_ladder:
-		if not is_on_floor():
-			motion.x = 0
+#		print(motion)
+#		if not is_on_floor():
+#			motion.x = 0
+#		else:
+#			if down:
+#				print("floor down")
 		
 		if up:
 			GRAVITY = 0
-#			motion.x += 10
-			motion.y -= 2
-		
-		if down:
-			GRAVITY = 0
-#			motion.x += 10
-			motion.y += 2
-
-		if up_released or down_released:
-			motion.y = 0
+			position.y -= 1
+		elif down:
+			if not is_on_floor():
+				GRAVITY = 0
+				position.y += 1
+		elif left and not right:
+			position.x -= 1
+		elif right and not left:
+			position.x +=1
+#		else:
+#			motion.y = 0
+	else:
+		GRAVITY = 20
 	
 	if on_ladder:
 		if down:
 			collider.get_node("LadderCollision").disabled = true
-#			on_ladder = false
 		else:
 			collider.get_node("LadderCollision").disabled = false
-#		GRAVITY =  0
 
 	if jump:
 		change_state(JUMP)
@@ -226,6 +231,8 @@ func stomp():
 		if collider.is_in_group("rigid_body"):
 			stomping = false
 
+		if collider.is_in_group("ladder"):
+			print("lalalalal")
 
 func shoot():
 	if fireball_power >= 1:

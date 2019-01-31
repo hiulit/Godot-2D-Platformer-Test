@@ -51,6 +51,6 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="DayNight" parent="." index="2" instance=ExtResource( 3 )]
 
-day_start_hour = 10.5
+day_start_hour = 10.3
 
 
